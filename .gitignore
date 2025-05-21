@@ -1,0 +1,10 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Virtual env
+backend/.venv/
+
+# Fichiers audio volumineux (si vous ne voulez pas les versionner)
+backend/recordings/*.wav
