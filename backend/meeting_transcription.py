@@ -22,7 +22,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 HF_TOKEN       = os.getenv("HUGGINGFACE_HUB_TOKEN") or os.getenv("HUGGINGFACE_TOKEN")
 _MAX_BYTES     = 25 * 1024 * 1024      # 25 MiB max for Whisper upload
 _CHUNK_MS       = 4 * 60 * 1000        # 4 minutes per chunk
-_DIAR_THRESHOLD = 5 * 60 * 1000        # 5 minutes max for diarization
+_DIAR_THRESHOLD = 1        # 5 minutes max for diarization
 
 # ——————————————————————————————
 # Chargement du pipeline Pyannote pour diarization
@@ -199,17 +199,17 @@ def transcribe_with_progress(audio_file: str):
         )},
             {"role":"user","content":("Voici la transcription complète de la réunion, avec les étiquettes de locuteurs :\n\n"
             f"{transcript}\n\n"
-            "Tu es un expert en analyse de réunion. À partir de la transcription suivante, rédige un rapport structuré et très détaillé."
+            "Tu es un expert en analyse de réunion. À partir de la transcription suivante, rédige un rapport structuré et très détaillé. "
 "Consignes :"
 "1. Identifie clairement chaque interlocuteur (Prénom ou identifiant, s’il est précisé)."
 "2. Résume et détaille précisément ce que chaque interlocuteur a dit, point par point, en respectant l’ordre chronologique."
-"3. Distingue les interventions, les idées principales, les arguments, les questions, les réponses, les décisions prises, les désaccords éventuels, et les actions à suivre."
+"3. Distingue les interventions, les idées principales, les arguments, les questions, les réponses, les décisions prises, les désaccords éventuels, et les actions à suivre.comme ceci a),b) etc.."
 "4. N’omets aucun sujet abordé, même brièvement., les Titres doit etre en gras "
-"5. Utilise des titres, sous-titres et puces pour une lecture claire et professionnelle."
+"5. Utilise des titres, sous-titres et puces pour une lecture claire et professionnelle. n'utilise pas de ** ou hastage pour le titre juste 1), 2) etc."
 "6. Termine le rapport par une section “Synthèse & prochaines étapes” regroupant :"
-   "- Les points clés abordés."
-  " - Les décisions prises."
-   "- Les tâches/action points identifiés (avec responsables si mentionnés)."
+   "- Les points clés abordés. comme ceci a),b) etc.."
+  " - Les décisions prises. comme ceci a),b) etc.."
+   "- Les tâches/action points identifiés (avec responsables si mentionnés). comme ceci a),b) etc.."
             
             
             )}
